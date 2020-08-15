@@ -1,0 +1,55 @@
+<h1>Download</h1>
+
+<div novalidate>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+    <mat-form-field appearance="fill">
+      <mat-label>Firestorage Image Path</mat-label>
+      <input matInput formControlName="name">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>XXXXXXXXXXXXXX</mat-hint>
+      <mat-error *ngIf="!name.valid && name.touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-button color="primary" type="submit" [disabled]="!formGroup.valid">
+      Display Image
+    </button>
+  </form>
+  <button mat-button color="primary" (click)="clearImageContent()">
+    Clear Image
+  </button>
+</div>
+
+
+
+
+<div id="imageDiv">
+  <img [src]="profileUrl | async" />
+</div>
+
+
+<br>
+
+<!-- <button type="button" (click)="downloadToDisk('jpg', true)">
+  Download file to disk
+</button> -->
+
+<div novalidate>
+  <form [formGroup]="downloadDiskForm" (ngSubmit)="onSubmit2(downloadDiskForm.value)">
+    <mat-form-field appearance="fill">
+      <mat-label>Firestorage Image Path</mat-label>
+      <input matInput formControlName="name2">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>XXXXXXXXXXXXXX</mat-hint>
+      <mat-error *ngIf="!name2.valid && name2.touched">
+        {{ titleAlert }}
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-button color="primary"
+    type="submit" [disabled]="!downloadDiskForm.valid">
+      Download Image
+    </button>
+  </form>
+</div>
