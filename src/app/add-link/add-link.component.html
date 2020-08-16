@@ -1,0 +1,22 @@
+<p>Youtube Link DB</p>
+<ul>
+  <li *ngFor="let link of links | async">
+    <a [href]="sanitize(link.url)"> {{ link.name }}</a>
+    <mat-icon (click)="removeLink(link)"
+    aria-label="Delete">delete</mat-icon>
+  </li>
+</ul>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <formly-form
+    [form]="form"
+    [model]="model"
+    [fields]="fields">
+    </formly-form>
+
+    <button type="submit" color="primary" mat-raised-button>
+      Submit
+    </button>
+</form>
+
+

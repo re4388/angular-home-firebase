@@ -4,6 +4,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const os = require('os');
 const path = require('path');
+const moment = require('moment');
 
 
 
@@ -11,10 +12,17 @@ const path = require('path');
 Create and Deploy Your First Cloud Functions
 https://firebase.google.com/docs/functions/write-firebase-functions
 Endpoint: https://us-central1-practice-7953d.cloudfunctions.net/helloWorld
+
+Endpoint: https://us-central1-practice-7953d.cloudfunctions.net/checkTimeStamp?text=1597535439
+
 */
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
+exports.checkTimeStamp = functions.https.onRequest(async (req, res) => {
+  const textToInsert = req.query.text;
+  const result = moment.unix(Number(textToInsert) + 8 * 60 * 60)
+  .locale('zh-tw')
+  .format("YYYY-MM-DD HH:mm:ss a")
+  console.log(result)
+  res.json({"UTC+8": `${result}`});
 });
 
 
@@ -28,8 +36,10 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
   // Grab the text parameter.
   const textToInsert = req.query.text;
   // Push the new message into Cloud Firestore using the Firebase Admin SDK.
-  const writeResult = await admin.firestore().collection('messages').add({original: textToInsert});
-  // Send back a message that we've succesfully written the message
+  const writeResult = await admin.firestore()
+    .collection('messages')
+    .add({original: textToInsert});
+  // Send back a message that we've successfully written the message
   res.json({result: `Message with ID: ${writeResult.id} added.`});
 });
 

@@ -15,15 +15,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FileSaverModule } from 'ngx-filesaver';
 
-
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MaterialModule } from './material.module';
 import { ImgListComponent } from './component/img-list/img-list.component';
+import { AddLinkComponent } from './add-link/add-link.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 @NgModule({
   declarations: [
     AppComponent,
     UploadComponent,
     DownloadComponent,
-    ImgListComponent
+    ImgListComponent,
+    AddLinkComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,9 @@ import { ImgListComponent } from './component/img-list/img-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AngularFirestoreModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule,
 
 
 
