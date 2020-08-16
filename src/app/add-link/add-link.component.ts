@@ -58,7 +58,7 @@ export class AddLinkComponent implements OnInit {
     // this.links = this.youtubeSaveLinkCollection.valueChanges();
     // console.log(this.links);
 
-    // we need to have doc id
+    // we need to have doc id so we use snapshotChanges instead of valueChanges.
     this.links = this.youtubeSaveLinkCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Link;
@@ -89,7 +89,7 @@ export class AddLinkComponent implements OnInit {
       this.youtubeSaveLinkCollection.add(this.model);
     }
   }
-  
+
 
   ngOnInit(): void {
   }
